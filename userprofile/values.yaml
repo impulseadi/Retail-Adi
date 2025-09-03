@@ -1,0 +1,47 @@
+# Namespace
+namespace: adi
+
+# Userprofile Deployment
+replicas: 2
+labels:
+  app: userprofile
+name: usernode-js
+image:
+  repository: saiteja2502/userprofileretail
+  tag: latest
+port: 3130
+configMapName: userprofile-config
+secretName: userprofile-secret
+
+# Secrets
+secret:
+  SESSION_SECRET: MTIzNA==
+  EMAIL_USER: Y2hhZ2FudHl0ZWphMjUwMkBnbWFpbC5jb20=
+  EMAIL_PASS: eXhvcSBianVrIHJ0bnQgYWx6cA==
+
+# Userprofile Service
+service:
+  type: LoadBalancer
+  port: 3130
+  targetPort: 3130
+
+# MongoDB Deployment
+mongodb:
+  replicas: 1
+  app: mongodb
+  image:
+    repository: mongo
+    tag: latest
+  port: 27017
+  configMapName: mongodb-config
+  config:
+    MONGO_INITDB_DATABASE: myDatabase
+
+# MongoDB Service
+mongodbService:
+  type: ClusterIP
+  port: 27017
+  targetPort: 27017
+
+# Userprofile MongoDB URI
+userprofileMongoUri: "mongodb://mongodb:27017/myDatabase"
