@@ -20,4 +20,4 @@ spec:
         - containerPort: {{ .Values.mongodb.port }}
         envFrom:
           - configMapRef:
-              name: {{ .Values.mongodb.configMapName }}
+              name: {{ .Release.Name }}-mongodb-config

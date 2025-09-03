@@ -19,7 +19,7 @@ spec:
           ports:
             - containerPort: {{ .Values.port }}
           envFrom:
-            - configMapRef:
-                name: {{ .Values.configMapName }}
             - secretRef:
-                name: {{ .Values.secretName }}
+                name: {{ .Release.Name }}-userprofile-secret   # <-- match the Secret name
+            - configMapRef:
+                name: {{ .Release.Name }}-config
