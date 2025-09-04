@@ -4,4 +4,4 @@ metadata:
   name: {{ .Release.Name }}-mongodb-config
   namespace: {{ .Values.namespace }}
 data:
-  MONGO_INITDB_DATABASE: {{ .Values.mongodb.config.MONGO_INITDB_DATABASE | quote }}
+  MONGO_INITDB_DATABASE: {{ .Values.mongodb.config.MONGO_INITDB_DATABASE | quote }} # | quote will bind the email user into "" double quotes so that if it has certail special characters it won't misinterpret that.
